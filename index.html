@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Feeding guide and timer for orphaned kittens and puppies - what to feed, homemade emergency formulas, and alternatives.">
+<meta name="theme-color" content="#f4efe6">
+<title>My Pets — Guide & Timer for Orphaned Kittens & Puppies</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">🐾</span>
+        <span class="brand-text">
+          <strong>My Pets</strong>
+          <small>guide + timer for orphaned kittens &amp; puppies</small>
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <nav class="tabs" aria-label="Sections">
+    <button class="tab-btn active" data-tab="guide" type="button">Guide</button>
+    <button class="tab-btn" data-tab="recipes" type="button">Recipes</button>
+    <button class="tab-btn" data-tab="timer" type="button">Timer</button>
+    <button class="tab-btn" data-tab="emergency" type="button">Emergency</button>
+  </nav>
+
+  <main class="container">
+    <!-- ============ GUIDE TAB ============ -->
+    <section id="tab-guide" class="tab-panel active">
+      <div class="panel-intro">
+        <h1>Feeding guide</h1>
+        <p>Pick the animal, then read the stage that matches the babies' age. Amounts are per bottle-feeding — always feed by <strong>weight</strong>, not appetite.</p>
+      </div>
+
+      <div class="species-switch" role="tablist" aria-label="Choose animal">
+        <button class="species-btn active" data-species="kitten" type="button" role="tab" aria-selected="true">🐱 Kittens</button>
+        <button class="species-btn" data-species="puppy" type="button" role="tab" aria-selected="false">🐶 Puppies</button>
+      </div>
+
+      <div id="guide-content" class="guide-content" aria-live="polite"></div>
+    </section>
+
+    <!-- ============ RECIPES TAB ============ -->
+    <section id="tab-recipes" class="tab-panel">
+      <div class="panel-intro">
+        <h1>Formulas &amp; recipes</h1>
+        <p>Commercial milk replacer is always best. Homemade formulas are for <strong>emergencies only</strong> — until you can get real kitten/puppy milk replacer. Never feed plain cow's milk.</p>
+      </div>
+
+      <div class="species-switch" role="tablist" aria-label="Choose animal">
+        <button class="species-btn active" data-species="kitten" type="button" role="tab" aria-selected="true">🐱 Kittens</button>
+        <button class="species-btn" data-species="puppy" type="button" role="tab" aria-selected="false">🐶 Puppies</button>
+      </div>
+
+      <div id="recipes-content" class="recipes-content" aria-live="polite"></div>
+    </section>
+
+    <!-- ============ TIMER TAB ============ -->
+    <section id="tab-timer" class="tab-panel">
+      <div class="panel-intro">
+        <h1>Feeding timer</h1>
+        <p>Orphaned babies need round-the-clock feedings. Set the interval for your baby's stage and the app will remind you — day and night.</p>
+      </div>
+
+      <div class="timer-card">
+        <div class="timer-species-pick">
+          <div class="species-switch" role="tablist" aria-label="Choose animal for timer">
+            <button class="species-btn active" data-species="kitten" data-context="timer" type="button" role="tab" aria-selected="true">🐱 Kittens</button>
+            <button class="species-btn" data-species="puppy" data-context="timer" type="button" role="tab" aria-selected="false">🐶 Puppies</button>
+          </div>
+        </div>
+
+        <div class="interval-picker">
+          <label for="interval-select">Feed every</label>
+          <select id="interval-select"></select>
+        </div>
+
+        <div class="timer-display" id="timer-display" aria-live="assertive">
+          <div class="timer-time">00:00</div>
+          <div class="timer-status" id="timer-status">Timer not started</div>
+        </div>
+
+        <div class="timer-controls">
+          <button id="timer-start" class="btn btn-primary" type="button">Start timer</button>
+          <button id="timer-feed" class="btn btn-feed" type="button" disabled>✓ Fed &amp; restart</button>
+          <button id="timer-stop" class="btn btn-ghost" type="button" disabled>Stop</button>
+        </div>
+
+        <div class="timer-log-wrap">
+          <h2>Today's feedings</h2>
+          <p class="log-count" id="log-count">No feedings recorded yet.</p>
+          <button id="log-clear" class="btn btn-ghost btn-small" type="button">Clear history</button>
+        </div>
+
+        <p class="helper-note">💡 Tip: keep this page (or the tab) open. The reminder works best when the app is open — enable browser notifications below.</p>
+        <div class="notify-control">
+          <button id="notify-on" class="btn btn-ghost btn-small" type="button">Enable browser notifications</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EMERGENCY TAB ============ -->
+    <section id="tab-emergency" class="tab-panel">
+      <div class="panel-intro">
+        <h1>Emergency &amp; warning signs</h1>
+        <p>Neonatal babies go downhill fast. If a baby feels <strong>cold</strong>, is <strong>not eating</strong>, or is <strong>not gaining weight</strong>, act immediately.</p>
+      </div>
+
+      <div class="emergency-content" id="emergency-content"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>My Pets is an informational guide, not a substitute for a veterinarian. When in doubt, call your vet or nearest rescue as soon as possible — even at 2am.</p>
+    <p class="foot-sources">Sources: Merck Veterinary Manual · Maddie's Fund · Alley Cat Allies / National Kitten Coalition · PAWS Chicago · AKC · VCA Hospitals · Purina (affiliate sources)</p>
+  </footer>
+
+  <div id="alarm-overlay" class="alarm-overlay hidden" aria-hidden="true">
+    <div class="alarm-card">
+      <div class="alarm-emoji">🍼</div>
+      <h2>Time to feed!</h2>
+      <p id="alarm-copy">Your baby is hungry.</p>
+      <button id="alarm-dismiss" class="btn btn-primary" type="button">Got it</button>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
