@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://darkthebest.github.io/mypets-deployment/sitemap.xml
